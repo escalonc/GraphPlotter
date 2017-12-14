@@ -58,7 +58,7 @@ public:
         Node<T>* currentNode = this->begin;
 
         for (int i = 0; i < this->elementsQuantity; i++) {
-            if (this->equals(currentNode->getValue(), value)) {
+            if (currentNode->getValue() == value) {
                 return i;
             }
 
@@ -67,8 +67,6 @@ public:
 
         return -1;
     }
-
-    virtual bool equals(T firstValue, T secondValue) = 0;
 
     void insert(T value, int position)
     {
@@ -131,46 +129,46 @@ public:
         this->elementsQuantity--;
     }
 
-//    List* concatenate(List list)
-//    {
-//        List* tempList = list.clone();
-//        for (int i = 0; i < this->lementsQuantity; ++i) {
-//            tempList.add(this->elements[i]);
-//        }
+    List* concatenate(List list)
+    {
+        List* tempList = list.clone();
+        for (int i = 0; i < this->lementsQuantity; ++i) {
+            tempList.add(this->elements[i]);
+        }
 
-//        return list;
-//    }
+        return list;
+    }
 
-//    List* clone()
-//    {
-//        List* tempList = new List();
-//        Node<T>* currentNode = this->begin;
+    List* clone()
+    {
+        List* tempList = new List();
+        Node<T>* currentNode = this->begin;
 
-//        for (int i = 0; i < this->elementsQuantity; ++i) {
-//            tempList->add(currentNode->getValue());
-//            currentNode = currentNode->getNext();
-//        }
+        for (int i = 0; i < this->elementsQuantity; ++i) {
+            tempList->add(currentNode->getValue());
+            currentNode = currentNode->getNext();
+        }
 
-//        return tempList;
-//    }
+        return tempList;
+    }
 
-//    List* sublist(int start, int quantity)
-//    {
-//        List tempList = new List();
-//        int end = quantity = start + 1;
-//        Node<T>* currentNode = this->begin;
+    List* sublist(int start, int quantity)
+    {
+        List tempList = new List();
+        int end = quantity = start + 1;
+        Node<T>* currentNode = this->begin;
 
-//        for (int i = 0; i < end; ++i) {
-//            tempList->Add(currentNode->getValue());
-//            currentNode = currentNode->getNext();
-//        }
+        for (int i = 0; i < end; ++i) {
+            tempList->Add(currentNode->getValue());
+            currentNode = currentNode->getNext();
+        }
 
-//        for (int i = 0; i < end; ++i) {
-//            this->remove(i);
-//        }
+        for (int i = 0; i < end; ++i) {
+            this->remove(i);
+        }
 
-//        return tempList;
-//    }
+        return tempList;
+    }
 
     T getBack()
     {

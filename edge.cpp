@@ -23,6 +23,11 @@ Vertex*& Edge::getDestination()
     return this->destination;
 }
 
+void Edge::setWeigth(int value)
+{
+    this->weight = value;
+}
+
 int Edge::getWeight()
 {
     return this->weight;

@@ -1,25 +1,36 @@
 #include "line.h"
 
-Line::Line(QPointF source, QPointF destination)
+Line::Line(QPointF source, QPointF destination, Edge* edge)
+    : source(source),
+      destination(destination),
+      edge(edge)
 {
-    this->source = source;
-    this->destination = destination;
 }
 
 void Line::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-//    if (this->isDirected) {
-//        painter->setBrush(QBrush(Qt::blue));
-//        painter->drawEllipse(QRectF(this->destination.x(), this->destination.y(), 5, 5));
-//        painter->setBrush(QBrush());
-//    }
+    QPointF textPosition;
 
-    QPen pen(Qt::black, 5);
+    if(destination.x() > source.x())
+    {
+        textPosition = QPointF(destination.x() + source.x(), (destination.y() + source.y()) / 2);
+    }
+    else {
+
+        textPosition = QPointF((source.x() + destination.x()) / 2, destination.y() + source.y());
+    }
+
+    QPen pen(QBrush(Qt::blue), 7);
     painter->setPen(pen);
+    painter->drawEllipse(this->boundingRect());
+
+
+    painter->setPen(QPen(Qt::black, 5));
     painter->drawLine(this->source, this->destination);
+    painter->drawText(textPosition, QVariant(this->edge->getWeight()).toString());
 }
 
 QRectF Line::boundingRect() const
 {
-    return QRectF();
+    return QRectF(this->destination.x(), this->destination.y(), 10, 10);
 }

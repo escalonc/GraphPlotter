@@ -2,7 +2,7 @@
 #define VERTEX_H
 
 #include <string>
-#include "listedge.h"
+#include "list.h"
 
 using namespace std;
 
@@ -11,19 +11,27 @@ class Edge;
 class Vertex {
 public:
     Vertex(string name);
-    string getName();
+    string getName() const;
     void setName(string name);
-    ListEdge getEdges();
+    List<Edge*> getEdges();
     Edge*& getEdge(string destinationName);
     Edge*& getEdge(Vertex* destination);
     void addEdge(string sourceName, string destinationName);
     void addEdge(Edge*);
     void addEdge(Vertex* source, Vertex* destination);
+
+    void setEdges(List<Edge*>* edges);
+
+    inline bool operator==(const Vertex &value) const
+    {
+         return name == value.getName();
+    }
+
     //virtual ~Vertex();
 
 private:
     string name;
-    ListEdge edges;
+    List<Edge*> edges;
 };
 
 #endif

@@ -1,4 +1,5 @@
 #include "container.h"
+#include <QDebug>
 
 Container::Container(QWidget *parent) :
     QGraphicsScene(parent)
@@ -12,6 +13,7 @@ void Container::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
     if (!text.isEmpty())
     {
         Vertex* vertex = new Vertex(text.toStdString());
+        qDebug() << event->scenePos();
         Point* point = new Point(event->scenePos(), vertex);
         this->graph.addVertex(vertex);
         this->points.push_back(point);
@@ -19,7 +21,7 @@ void Container::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
     }
 }
 
-Point* Container::findPoint(string name)
+Point*& Container::findPoint(string name)
 {
     for (int i = 0; i < points.size(); ++i) {
        if(points[i]->getVertex()->getName() == name)
@@ -27,10 +29,9 @@ Point* Container::findPoint(string name)
     }
 }
 
-void Container::drawEdge(string firstPoint, string secondPoint, QString weight)
+void Container::drawEdge(string firstPoint, string secondPoint, int weight)
 {
-    QPointF source, destination, textPosition;
-
+    QPointF source, destination;
     Point* pointA, *pointB;
 
     pointA = findPoint(firstPoint);
@@ -39,31 +40,8 @@ void Container::drawEdge(string firstPoint, string secondPoint, QString weight)
     source = pointA->getPosition();
     destination = pointB->getPosition();
 
-    if(destination.x() > source.x())
-    {
-        source = QPointF(source.x() + 50, source.y());
-        textPosition = QPointF(destination.x() + source.x(), (destination.y() + source.y()) / 2);
-    }
-    else {
+//    source = QPointF(source.x() + 25, source.y() + 25);
+//    destination = QPointF(destination.x() + 25, destination.y() + 25);
 
-        textPosition = QPointF((source.x() + destination.x()) / 2, destination.y() + source.y());
-    }
-
-
-    if(source.y() > destination.y())
-    {
-
-    }
-
-    source = QPointF(source.x(), source.y() + 23);
-    destination = QPointF(destination.x() - 5, destination.y() + 23);
-
-    this->addLine(source.x(), source.y(), destination.x(), destination.y(), QPen(Qt::black, 5));
-
-    QGraphicsTextItem * text = this->addText(weight);
-    QGraphicsEllipseItem* circle = this->addEllipse(QRectF(10, 10, 10, 10),  QPen(), QBrush(Qt::blue));
-    circle->setPos(destination);
-    text->setPos(textPosition);
-
-    //this->addItem(new Line(source, destination));
+    this->addItem(new Line(source, destination, new Edge(pointA->getVertex(), pointB->getVertex(), weight)));
 }

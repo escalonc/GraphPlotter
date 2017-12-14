@@ -43,9 +43,6 @@ HEADERS += \
     container.h \
     list.h \
     node.h \
-    listvertex.h \
-    listedge.h \
-    listpoint.h \
     line.h \
     directedgraph.h
 

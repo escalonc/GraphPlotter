@@ -2,6 +2,7 @@
 #define LINE_H
 
 #include <QtWidgets>
+#include "edge.h"
 
 class Line : public QGraphicsItem
 {
@@ -10,9 +11,10 @@ private:
 
 protected:
     bool isDirected = true;
+    Edge* edge;
 
 public:
-    Line(QPointF source, QPointF destination);
+    Line(QPointF source, QPointF destination, Edge* edge);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     QRectF boundingRect() const;
 };
