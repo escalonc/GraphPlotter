@@ -15,7 +15,7 @@ public:
     void setName(string name);
     List<Edge*> getEdges();
     Edge*& getEdge(string destinationName);
-    Edge*& getEdge(Vertex* destination);
+    Edge* getEdge(Vertex* destination);
     void addEdge(string sourceName, string destinationName);
     void addEdge(Edge*);
     void addEdge(Vertex* source, Vertex* destination);

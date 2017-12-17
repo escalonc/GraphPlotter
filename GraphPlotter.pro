@@ -32,7 +32,9 @@ SOURCES += \
     point.cpp \
     container.cpp \
     line.cpp \
-    directedgraph.cpp
+    directedgraph.cpp \
+    arrow.cpp \
+    algorithmplotter.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -44,10 +46,10 @@ HEADERS += \
     list.h \
     node.h \
     line.h \
-    directedgraph.h
+    directedgraph.h \
+    arrow.h \
+    algorithmplotter.h
 
 FORMS += \
-        mainwindow.ui
-
-RESOURCES += \
-    resources.qrc
+        mainwindow.ui \
+    algorithmplotter.ui

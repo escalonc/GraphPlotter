@@ -25,9 +25,9 @@ public:
 
     void add(T value)
     {
-        if (this->exists(value)) {
-            return;
-        }
+//        if (this->exists(value)) {
+//            return;
+//        }
 
         Node<T>* newNode = new Node<T>(value);
 

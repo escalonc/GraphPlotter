@@ -14,7 +14,7 @@ using namespace std;
 class Container : public QGraphicsScene
 {
 private:
-    QWidget* window;
+    QWidget *parent;
     Graph graph;
     Point*& findPoint(string name);
 
@@ -23,12 +23,11 @@ protected:
 
 public:
     explicit Container(QWidget *parent = 0);
-    void mouseDoubleClickEvent(QGraphicsSceneMouseEvent * mouseEvent);
+    Container(Graph graph , vector<Point*> points, QWidget *parent = 0);
     void drawEdge(string firstPoint, string secondPoint, int weight);
 
-signals:
-
 public slots:
+    void mouseDoubleClickEvent(QGraphicsSceneMouseEvent * mouseEvent);
 };
 
-#endif // CONTAINER_H
+#endif

@@ -20,13 +20,13 @@ List<Edge*> Vertex::getEdges()
     return this->edges;
 }
 
-Edge*& Vertex::getEdge(Vertex *destination)
+Edge* Vertex::getEdge(Vertex *destination)
 {
-    int position = this->edges.find(destination);
+    int position = 1;
 
-    if (position == -1) {
-        return nullptr;
-    }
+//    if (position == -1) {
+//        return NULL;
+//    }
 
     return this->edges.get(position);
 }

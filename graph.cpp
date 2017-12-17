@@ -1,4 +1,5 @@
 #include "graph.h"
+#include <climits>
 
  Graph::Graph()
 {
@@ -17,7 +18,7 @@ void Graph::addVertex(Vertex *vertex)
 int Graph::getWeigth(Vertex* startVertex, Vertex* endVertext)
 {
     int startVertexPosition = vertices.find(startVertex);
-    Vertex* currentVertex = vertices.get(startVertex);
+    Vertex* currentVertex = vertices.get(startVertexPosition);
 
     Edge* edge = currentVertex->getEdge(endVertext);
 
@@ -30,10 +31,10 @@ int Graph::getWeigth(Vertex* startVertex, Vertex* endVertext)
 
 }
 
-int Graph::getEdge(Vertex* startVertex, Vertex* endVertext)
+Edge*& Graph::getEdge(Vertex* startVertex, Vertex* endVertext)
 {
     int startVertexPosition = vertices.find(startVertex);
-    Vertex* currentVertex = vertices.get(startVertex);
+    Vertex* currentVertex = vertices.get(startVertexPosition);
 
     Edge* edge = currentVertex->getEdge(endVertext);
 
@@ -70,12 +71,12 @@ Graph* Graph::floyd_warshall()
     Graph* graph = this->clone();
     List<Vertex*>* vertices = graph->getAdjacencies();
 
-    for (int i = 0; i < vertices->getSize(); ++i) {
-        for (int j = 0; i < vertices->getSize(); ++i) {
-            for (int k = 0; i < vertices->getSize(); ++i) {
-                int weigthPath = this->getWeigth(vertices->get(j), vertices->get(i));
-                if (getWeigth(vertices->get(i), vertices->get(j) > weigthPath)) {
-                    this->getEdge(vertices->get(i), vertices->get(j))->setWeigth(weigthPath);
+    for (int k = 0; k < vertices->getSize(); ++k) {
+        for (int i = 0; k < vertices->getSize(); ++i) {
+            for (int j = 0; k < vertices->getSize(); ++j) {
+                int weigthPath = this->getWeigth(vertices->get(i), vertices->get(k)) + getWeigth(vertices->get(k), vertices->get(j));
+                if (getWeigth(vertices->get(i), vertices->get(j)) > weigthPath) {
+                    this->getEdge(vertices->get(k), vertices->get(i))->setWeigth(weigthPath);
                 }
             }
         }

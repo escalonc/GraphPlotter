@@ -1,9 +1,18 @@
 #include "point.h"
 
-Point::Point(QPointF position, Vertex* vertex)
+Point::Point(QPointF position, Vertex* vertex, QGraphicsItem *parent)
     : position(position),
-      vertex(vertex)
+      vertex(vertex),
+      QGraphicsPolygonItem(parent)
 {
+    QPainterPath path;
+
+    myPolygon << QPointF(-50, -50) << QPointF(50, -50)
+              << QPointF(50, 50) << QPointF(-50, 50)
+              << QPointF(-50, -50);
+
+    setPos(position);
+    setPolygon(myPolygon);
 }
 
 Point::~Point()
@@ -11,10 +20,10 @@ Point::~Point()
     delete this->vertex;
 }
 
-QRectF Point::boundingRect() const
-{
-    return QRectF(this->position.x(), this->position.y(), 50, 50);
-}
+//QRectF Point::boundingRect() const
+//{
+//    return QRectF(this->position.x(), this->position.y(), 50, 50);
+//}
 
 Vertex*& Point::getVertex()
 {
@@ -30,7 +39,7 @@ void Point::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 {
     QPen pen = painter->pen();
     pen.setCosmetic(true);
-    pen.setWidth(2);
+    pen.setWidth(5);
     pen.setColor(QColor(Qt::green));
     painter->setPen(pen);
     QBrush brush = painter->brush();
@@ -38,6 +47,7 @@ void Point::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
     painter->setBrush(brush);
     painter->drawEllipse(this->boundingRect());
 
-    QPoint textLocation(position.x() + 20, position.y() + 20);
-                painter->drawText(textLocation, QString::fromStdString(vertex->getName()));
+    QPointF textLocation = this->boundingRect().center();
+                painter->drawText(textLocation.toPoint(), QString::fromStdString(vertex->getName()));
 }
+

@@ -83,16 +83,6 @@
      <string>Segundo vertice</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_3">
-    <property name="geometry">
-     <rect>
-      <x>590</x>
-      <y>540</y>
-      <width>113</width>
-      <height>30</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
@@ -104,6 +94,29 @@
     </property>
     <property name="text">
      <string>Peso</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>870</x>
+      <y>560</y>
+      <width>181</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Ver algoritmo</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="weightBox">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>540</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
     </property>
    </widget>
   </widget>
